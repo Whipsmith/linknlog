@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import Accounts from '../login/accounts';
+//{this.user().email}
 class Nav extends Component{
 
   user() {
@@ -8,23 +9,26 @@ class Nav extends Component{
 
   navLinks() {
     if (!Meteor.loggingIn() && Meteor.user()) {
+      console.log(Meteor.user());
       return (
         <ul className="nav navbar-nav pull-right">
-          <li><a href="#profile">{this.user().emails[0].address}</a></li>
+          <li><a href="#profile">{Meteor.user().services.google.given_name}</a></li>
           <li><a href="/logout">Logout</a></li>
         </ul>
       );
     } else {
       return (
         <ul className="nav navbar-nav pull-right">
-          <li><a href="/sign-in">Sign In</a></li>
-          <li><a href="/sign-up">Sign Up</a></li>
+          <li><Accounts /></li>
         </ul>
       );
     }
   }
 
+
+
   render() {
+
     return (
       <nav className="navbar navbar-default navbar-static-top" role="navigation">
         <div className="container">
@@ -37,7 +41,7 @@ class Nav extends Component{
                 <span className="icon-bar"></span>
               </button>
               <span className="navbar-brand">
-                <img alt="UserAccounts" width="25" height="25" src="/imgs/ua-logo.png" />
+                <div>Link 'n Log</div>
               </span>
             </div>
             <div className="collapse navbar-collapse">
